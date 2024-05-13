@@ -110,7 +110,7 @@ public class Shader extends Resource
     {
         create_uniform(GAME_OBJECT_3D_TRANSFORM);
         create_uniform(CAMERA_VIEW);
-        create_uniform(ORTHOGRAPHIC_PROJECTION);
+        create_uniform(PERSPECTIVE_PROJECTION);
         Material.CREATE_DEFAULT_UNIFORMS(this);
     }
     public Map<String, Integer> get_set_uniforms() { return m_uniforms; }

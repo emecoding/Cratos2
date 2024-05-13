@@ -51,7 +51,6 @@ public class Material
             m_texture.use();
         }
 
-
     }
 
     private String generate_name_for_texture()

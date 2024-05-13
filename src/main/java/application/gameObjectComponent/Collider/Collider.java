@@ -12,10 +12,10 @@ import java.util.List;
 
 public class Collider extends GameObjectComponent
 {
-    private Vector3f m_size = new Vector3f(1.0f);
-    private Vector3f m_position_offset = new Vector3f(0.0f);
-    private boolean render_debug_rect = false;
-    private List<GameObject> m_collisions = new ArrayList<>();
+    protected Vector3f m_size = new Vector3f(1.0f);
+    protected Vector3f m_position_offset = new Vector3f(0.0f);
+    protected boolean render_debug_rect = false;
+    protected List<GameObject> m_collisions = new ArrayList<>();
 
 
     public void set_size(float w, float h, float d) { m_size = new Vector3f(w, h, d); }
@@ -37,8 +37,13 @@ public class Collider extends GameObjectComponent
     {
         if(render_debug_rect)
         {
-            Application.application_renderer.render_debug_rectangle(get_debug_rect());
+            render_debug_rect();
         }
+    }
+
+    protected void render_debug_rect()
+    {
+
     }
 
     public void add_collision(GameObject other)
@@ -60,8 +65,5 @@ public class Collider extends GameObjectComponent
 
     public List<GameObject> collisions() { return m_collisions; }
 
-    private Vector4f get_debug_rect()
-    {
-        return new Vector4f(parent.transform.position.x - m_position_offset.x, parent.transform.position.y - m_position_offset.y, m_size.x, m_size.y);
-    }
+
 }
