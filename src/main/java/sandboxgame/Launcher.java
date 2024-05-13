@@ -1,7 +1,6 @@
 package sandboxgame;
 
 import application.Application;
-import application.applicationSystem.renderer.Renderer;
 import application.applicationSystem.window.Window;
 import application.gameObject.GameObject;
 import application.gameObjectComponent.Camera;
@@ -27,7 +26,6 @@ public class Launcher
         Application.application_window.set_window_hint(GLFW_RESIZABLE, GLFW_FALSE);
         Application.application_window.set_background_color(0.2f, 0.3f, 0.3f, 1.0f);
 
-        Application.application_renderer = new Renderer();
 
         Application.initialize();
 
@@ -53,11 +51,6 @@ public class Launcher
         rb1.gravity = 1000.0f;
         rb1.active = false;
 
-
-        /*RectangleCollider rect_collider = (RectangleCollider) sandbox_gameObject.add_component(new RectangleCollider());
-        rect_collider.set_size(200.0f, 200.0f);
-        rect_collider.set_position_offset(100.0f, 100.0f);
-        rect_collider.render_debug_rect(true);*/
 
         BoxCollider bxc = (BoxCollider) sandbox_gameObject.add_component(new BoxCollider());
         bxc.set_size(200.0f, 200.0f);

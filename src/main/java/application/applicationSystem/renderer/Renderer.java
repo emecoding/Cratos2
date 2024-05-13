@@ -55,8 +55,6 @@ public class Renderer implements ApplicationSystem
         set_up_debug_rendering();
         set_up_sprite_rendering();
         set_up_model_rendering();
-
-        //TODO Text rendering - possibly to another file
     }
 
     @Override
@@ -69,7 +67,7 @@ public class Renderer implements ApplicationSystem
     {
         if(m_cameras.size() == 0)
             return;
-        m_current_camera = m_cameras.get(0); //TODO later on check which cameras are on and somehow sort them into tärkeysjärjestys.
+        m_current_camera = m_cameras.get(0);
     }
     public Camera get_current_camera() { return m_current_camera; }
     public void add_camera(Camera camera_component)

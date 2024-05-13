@@ -18,7 +18,7 @@ public class Application
 {
 
     public static Window application_window = null;
-    public static Renderer application_renderer = null;
+    public static Renderer application_renderer = new Renderer();
     public static final ResourceManager application_resource_manager = new ResourceManager();
     public static final Input application_input = new Input();
     private static final SceneManager application_scene_manager = new SceneManager();
