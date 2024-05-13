@@ -12,7 +12,7 @@ public class Model extends RenderComponent
     public Model(String shader)
     {
         set_shader_name(shader);
-        //TODO Model animations - dumb every .obj into one file with java and loop over them frame by frame!
+        //TODO Model animations - dumb every .obj into one file with java and loop over them frame by frame.
     }
 
     public void render()
