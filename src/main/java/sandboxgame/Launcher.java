@@ -5,6 +5,7 @@ import application.applicationSystem.renderer.Renderer;
 import application.applicationSystem.window.Window;
 import application.gameObject.GameObject;
 import application.gameObjectComponent.Camera;
+import application.gameObjectComponent.Collider.BoxCollider;
 import application.gameObjectComponent.Collider.RectangleCollider;
 import application.gameObjectComponent.Model.ModelLoader;
 import application.gameObjectComponent.RenderObject;
@@ -13,6 +14,7 @@ import application.gameObjectComponent.Sprite;
 import application.scene.Scene;
 import org.joml.Vector3f;
 
+import static application.gameObjectComponent.Camera.DEFAULT_CAMERA_Z;
 import static org.lwjgl.assimp.Assimp.aiProcess_JoinIdenticalVertices;
 import static org.lwjgl.assimp.Assimp.aiProcess_Triangulate;
 import static org.lwjgl.glfw.GLFW.*;
@@ -37,27 +39,33 @@ public class Launcher
         Scene sandbox_scene = Application.get_scene("Sandbox Scene");
 
         GameObject sandbox_camera = sandbox_scene.create_gameObject();
+        sandbox_camera.transform.position.z = DEFAULT_CAMERA_Z;
         sandbox_camera.add_component(new Camera());
 
         GameObject sandbox_gameObject = sandbox_scene.create_gameObject();
-        sandbox_gameObject.transform.position = new Vector3f(400.0f, 300.0f, 0.0f);
-        sandbox_gameObject.transform.rotation = new Vector3f(0.0f, 0.0f, 180.0f);
-        sandbox_gameObject.transform.scale = new Vector3f(100.0f, 100.0f, 100.0f);
+        sandbox_gameObject.transform.position = new Vector3f(0.0f, 0.0f, 0.0f);
+        sandbox_gameObject.transform.rotation = new Vector3f(180.0f, 0.0f, 180.0f);
+        sandbox_gameObject.transform.scale = new Vector3f(0.5f, 0.5f, 0.5f);
 
         sandbox_gameObject.add_component(ModelLoader.load_model("src/main/resources/models/frank.obj", "DEFAULT_MODEL", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices));
         sandbox_gameObject.add_component(new rotator());
         RigidBody rb1 = (RigidBody) sandbox_gameObject.add_component(new RigidBody());
         rb1.gravity = 1000.0f;
+        rb1.active = false;
 
 
-        RectangleCollider rect_collider = (RectangleCollider) sandbox_gameObject.add_component(new RectangleCollider());
+        /*RectangleCollider rect_collider = (RectangleCollider) sandbox_gameObject.add_component(new RectangleCollider());
         rect_collider.set_size(200.0f, 200.0f);
         rect_collider.set_position_offset(100.0f, 100.0f);
-        rect_collider.render_debug_rect(true);
+        rect_collider.render_debug_rect(true);*/
+
+        BoxCollider bxc = (BoxCollider) sandbox_gameObject.add_component(new BoxCollider());
+        bxc.set_size(200.0f, 200.0f);
+        bxc.render_debug_rect(true);
 
 
         GameObject sandbox_gameObject2 = sandbox_scene.create_gameObject();
-        sandbox_gameObject2.transform.position = new Vector3f(100.0f, 500.0f, 0.0f);
+        sandbox_gameObject2.transform.position = new Vector3f(100.0f, 500.0f, 1.0f);
         sandbox_gameObject2.transform.scale = new Vector3f(700.0f, 40.0f, 1.0f);
         sandbox_gameObject2.add_component(new RenderObject());
 

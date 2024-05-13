@@ -50,10 +50,7 @@ public class Renderer implements ApplicationSystem
     @Override
     public void initialize()
     {
-        glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         set_up_debug_rendering();
         set_up_sprite_rendering();
@@ -72,8 +69,9 @@ public class Renderer implements ApplicationSystem
     {
         if(m_cameras.size() == 0)
             return;
-        m_current_camera = m_cameras.get(0); //later on check which cameras are on and somehow sort them into tärkeysjärjestys.
+        m_current_camera = m_cameras.get(0); //TODO later on check which cameras are on and somehow sort them into tärkeysjärjestys.
     }
+    public Camera get_current_camera() { return m_current_camera; }
     public void add_camera(Camera camera_component)
     {
         m_cameras.add(camera_component);
@@ -196,6 +194,11 @@ public class Renderer implements ApplicationSystem
                 case ORTHOGRAPHIC_PROJECTION ->
                 {
                     current_shader.set_uniform(ORTHOGRAPHIC_PROJECTION, m_current_camera.get_orthographic_projection());
+                }
+
+                case PERSPECTIVE_PROJECTION ->
+                {
+                    current_shader.set_uniform(PERSPECTIVE_PROJECTION, m_current_camera.get_perspective_projection());
                 }
             }
         }

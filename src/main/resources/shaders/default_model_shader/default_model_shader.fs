@@ -7,6 +7,9 @@ uniform sampler2D texture_sampler;
 uniform vec4 diffuse_color;
 uniform int has_texture;
 
+//TODO lighting
+//TODO struct Material
+
 void main()
 {
     gl_FragColor = diffuse_color;
