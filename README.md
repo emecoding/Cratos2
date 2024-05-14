@@ -34,8 +34,33 @@ Currently you do not need to touch the renderer in order for the program to exec
     Application.resource_manager
 is the main instance of the resource manager for the program. To see more about the Resource Manager class, check out #ResourceManager.
 
-- application_resource_manager
-- application_input
+<br>
+
+    Application.application_input
+is the main instance of the input class for the program. To see more about the Input class, check out #Input
+
+<br>
+
+    public static void initialize()
+Initialize the application. This function also initializes GLFW and OpenGL, so be sure to call this function before doing anything else. Application.application_window and Application.application_renderer has to be created before the initialize function is called.
+
+<br>
+
+    public static void launch()
+Launch the application after the set up has been done. This starts the main loop for the application. Check out Application.terminate_safely() for safe termination of the program.
+
+<br>
+
+    public static void terminate_safely()
+This function terminates the program safely. The function just calls the Application.application_window.set_window_should_close(true) function, which closes the main loop of the application.
+
+<br>
+
+    public static void destroy()
+Destroys the application and closes all the resources safely.
+
+
+
 - application_collision_manager (no need to care about that for the user)
 
 # Debug
@@ -131,6 +156,15 @@ Get a shader from the resource manager.
     public Texture get_texture(String texture)
 Get a texture from the resource manager.
 
+# Input
+
+Check out all the keys from [here.](https://www.glfw.org/docs/3.3.2/group__keys.html)
+
+<br>
+
+    public boolean keyboard_key_pressed(int key)
+Checks if a key from keyboard is pressed. Returns true if so.
+
 # Shader
 
 # Texture
@@ -150,3 +184,4 @@ Get a texture from the resource manager.
 - Config file where the user can declare variables that the program will use (for example: window size)
 - More error messages!
 - Add material to resource manager.
+- Application.application_scene_manager will be public, which clears the Application class.
