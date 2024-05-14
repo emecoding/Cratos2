@@ -26,13 +26,19 @@ is the main instance of the window for the program. To see more about the Window
 is the main instance of the renderer for the program. Currently you have to create the renderer by yourself:
 
     Application.application_renderer = new Renderer()
+    This is fixed in task 2!
 Currently you do not need to touch the renderer in order for the program to execute. Later on the renderer class will be made so that the user can create their own renderer expanding on the Renderer.java class.
 
+<br>
 
-- application_renderer (no need to care about that for the user probably)
+    Application.resource_manager
+is the main instance of the resource manager for the program. To see more about the Resource Manager class, check out #ResourceManager.
+
 - application_resource_manager
 - application_input
 - application_collision_manager (no need to care about that for the user)
+
+# Debug
 
 # Window
 
@@ -75,6 +81,44 @@ Get the size of the window.
     public long get_window_long()
 Get the LWJGL window id.
 
+# ResourceManager
+
+Resource manager holds the shaders and the textures of the program. Every resource will have a name, and can be accessed with that.
+Currently you have to add all the resources you want to use manually, but later on the resource manager will load them automatically!
+
+<br>
+
+    public void add_shader(String name, String vertex_path, String fragment_path)
+Add a shader to the resource manager.
+
+<br>
+
+    public void add_texture(String name, String path)
+Add a texture with a name and a path to the resource manager.
+
+<br>
+
+    public void add_texture(Texture texture)
+Add an already created texture to the resource manager.
+Textures can be created with 
+
+    Texture.create_texture_3D(String name, String path)
+    or
+    Texture.create_texture_2D(String name, String path)
+
+
+<br>
+
+    public Shader get_shader(String name)
+Get a shader from the resource manager.
+
+<br>
+
+    public Texture get_texture(String texture)
+Get a texture from the resource manager.
+
+# Texture
+
 # Scene
 
 # GameObject
@@ -88,3 +132,5 @@ Get the LWJGL window id.
 - No need to create the main renderer by hand - will be created automatically.
 - The resource manager will automatically load every shader and texture from the resources folder.
 - Config file where the user can declare variables that the program will use (for example: window size)
+- More error messages!
+- Add material to resource manager.
