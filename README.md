@@ -40,6 +40,20 @@ is the main instance of the resource manager for the program. To see more about 
 
 # Debug
 
+Make your code more debuggable with the Debug class.
+
+<br>
+
+    Debug.error(String message)
+Print out an error to the console.
+
+<br>
+
+    Debug.log(String message)
+Print out an message to the console.
+
+
+
 # Window
 
     public void set_window_hint(int hint, int value)
@@ -116,6 +130,8 @@ Get a shader from the resource manager.
 
     public Texture get_texture(String texture)
 Get a texture from the resource manager.
+
+# Shader
 
 # Texture
 
