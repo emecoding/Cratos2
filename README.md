@@ -167,6 +167,23 @@ Checks if a key from keyboard is pressed. Returns true if so.
 
 # Shader
 
+    public Shader(String name, String vertex_path, String fragment_path)
+Create a shader from a vertex file and a fragment path.
+
+<br>
+
+    public void create_uniform(String uniform)
+Create a uniform for the shader. You can find all the uniforms from Shader/UniformConstants.java. If you do this, some of the shader uniforms will be automatically loaded to the shader.
+
+<br>
+
+    public void set_uniform(String uniform, Matrix4f value)
+    public void set_uniform(String uniform, Vector4f value)
+    public void set_uniform(String uniform, int value)
+Set value of a uniform. The uniform has to be created before calling this function.
+
+
+    
 # Texture
 
 # Scene
