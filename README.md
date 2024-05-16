@@ -182,6 +182,25 @@ Create a uniform for the shader. You can find all the uniforms from Shader/Unifo
     public void set_uniform(String uniform, int value)
 Set value of a uniform. The uniform has to be created before calling this function.
 
+<br>
+
+    public void create_default_2D_uniforms()
+Creates the default uniforms for the default 2D shader.
+
+<br>
+
+    public void create_default_3D_uniforms()
+Creates the default uniforms for the default 3D shader.
+
+<br>
+
+    public Map<String, Integer> get_set_uniforms()
+Get all the created and set uniforms in a map.
+
+<br>
+
+    public void bind()
+Use the shader.
 
     
 # Texture
@@ -189,8 +208,19 @@ Set value of a uniform. The uniform has to be created before calling this functi
 # Scene
 
 # GameObject
-    Code can be added like this.
+    public GameObject()
+Create an empty gameObject. This method is not recommended, but use the way described in #Scene.
 
+<br>
+
+    public Transform transform;
+Access the transform component of the gameObject.
+
+<br>
+
+    public List<GameObjectComponent> m_components;
+Access all the components of the gameObject. The transform component of the gameObject is not in this list, but use method described above.
+    
 # GameObjectComponent
 
 
