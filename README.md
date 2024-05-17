@@ -220,9 +220,30 @@ Access the transform component of the gameObject.
 
     public List<GameObjectComponent> m_components;
 Access all the components of the gameObject. The transform component of the gameObject is not in this list, but use method described above.
-    
+
+<br>
+
+    public GameObjectComponent add_component(GameObjectComponent component)
+Add a new component to a gameObject. It is recommended to add a new component the following way:
+
+    Rigidbody rb = (Rigidbody) gameObject.add_component(new Rigidbody());
+
+<br>
+
+    public GameObjectComponent get_component(Type component_type)
+Get a component from a gameObject. Returns null if the component type is not found. It is recommended to use this function the following way:
+
+    Rigidbody rb = (Rigidbody) gameObject.get_component(Rigidbody.class);
+
 # GameObjectComponent
 
+    public GameObject parent;
+The parent gameObject of the component.
+
+<br>
+
+    public boolean active;
+A boolean value to indicate if the component is active. Default value is true.
 
 # Coming Up
 
