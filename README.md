@@ -245,6 +245,27 @@ The parent gameObject of the component.
     public boolean active;
 A boolean value to indicate if the component is active. Default value is true.
 
+<br>
+
+    public void initialize()
+A function called when the scene gets initialized. If you override this, do it the following way:
+
+    @override
+    public void initialize()
+    {
+        this.initialize();
+        //YOUR OWN CODE
+    }
+
+<br>
+
+    public void update()
+A function called every frame. When overriding this function, please do it the same way as described in GameObjectComponent.initialize .
+
+
+
+# Time
+
 # Coming Up
 
 - No need to create the main renderer by hand - will be created automatically.
