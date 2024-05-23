@@ -44,11 +44,11 @@ public class Shader extends Resource
 
     private void create_vertex_shader(String vertex_path) throws Exception
     {
-        m_vertex_shader_id = create_shader(ResourceManager.load_resource_from_path(vertex_path), GL_VERTEX_SHADER);
+        m_vertex_shader_id = create_shader(ResourceManager.read_file(vertex_path), GL_VERTEX_SHADER);
     }
     private void create_fragment_shader(String fragment_path) throws Exception
     {
-        m_fragment_shader_id = create_shader(ResourceManager.load_resource_from_path(fragment_path), GL_FRAGMENT_SHADER);
+        m_fragment_shader_id = create_shader(ResourceManager.read_file(fragment_path), GL_FRAGMENT_SHADER);
     }
     private int create_shader(String shader_code, int shader_type) throws Exception
     {
