@@ -11,7 +11,7 @@ public class Sprite extends RenderComponent
     {
         set_shader_name(shader_name);
 
-        m_texture = Application.application_resource_manager.get_texture(texture_name);
+        m_texture = Application.ResourceManager().get_texture(texture_name);
         if(m_texture == null)
         {
             Debug.error("No such texture found as '" + texture_name + "'.");
@@ -26,7 +26,7 @@ public class Sprite extends RenderComponent
             m_texture.use();
         }
 
-        Application.application_renderer.render_rectangle();
+        Application.Renderer().render_rectangle();
     }
 
 }

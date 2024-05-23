@@ -130,7 +130,7 @@ public class Renderer implements ApplicationSystem
 
         glBindVertexArray(0);
 
-        Shader debug_shader = Application.application_resource_manager.get_shader("default_debug_shader");
+        Shader debug_shader = Application.ResourceManager().get_shader("default_debug_shader");
         debug_shader.create_default_2D_uniforms();
     }
     private void set_up_sprite_rendering()
@@ -149,19 +149,19 @@ public class Renderer implements ApplicationSystem
 
         glBindVertexArray(0);
 
-        Shader sprite_shader = Application.application_resource_manager.get_shader("default_sprite_shader");
+        Shader sprite_shader = Application.ResourceManager().get_shader("default_sprite_shader");
         sprite_shader.create_default_2D_uniforms();
     }
     private void set_up_model_rendering()
     {
-        Shader default_model_shader = Application.application_resource_manager.get_shader("default_model_shader");
+        Shader default_model_shader = Application.ResourceManager().get_shader("default_model_shader");
         default_model_shader.create_default_3D_uniforms();
     }
     private void set_up_current_shader_for_rendering(String shader_name, Matrix4f transform_2D_matrix, Matrix4f transform_3D_matrix)
     {
         update_current_camera();
 
-        Shader current_shader = Application.application_resource_manager.get_shader(shader_name);
+        Shader current_shader = Application.ResourceManager().get_shader(shader_name);
         if(current_shader == null)
         {
             Debug.error("No such shader found as '" + shader_name + "'.");

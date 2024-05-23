@@ -17,7 +17,7 @@ public class Material
     private Vector4f m_diffuse_color = new Vector4f(0.0f, 0.0f, 0.0f, 0.0f);
     private String m_texture_path;
     private Texture m_texture;
-
+    private Shader m_shader = null;
 
     public Material()
     {
@@ -36,18 +36,19 @@ public class Material
     {
         m_texture_path = path;
         String texture_name = generate_name_for_texture();
-        m_texture = Application.application_resource_manager.get_texture(texture_name);
+        m_texture = Application.ResourceManager().get_texture(texture_name);
         if(m_texture == null)
             create_texture_for_material(texture_name);
     }
 
     public void use(String shader_name)
     {
-        Shader shader = Application.application_resource_manager.get_shader(shader_name);
-        shader.set_uniform(DIFFUSE_COLOR, m_diffuse_color);
+        if(m_shader == null)
+            m_shader = Application.ResourceManager().get_shader(shader_name);
+        m_shader.set_uniform(DIFFUSE_COLOR, m_diffuse_color);
         if(m_texture != null)
         {
-            shader.set_uniform(HAS_TEXTURE, 1);
+            m_shader.set_uniform(HAS_TEXTURE, 1);
             m_texture.use();
         }
 
@@ -64,7 +65,7 @@ public class Material
     {
         Debug.log("Didn't find texture '" + texture_name + "'. Creating one.");
         Texture texture = Texture.create_texture_3D(texture_name, m_texture_path);
-        Application.application_resource_manager.add_texture(texture);
+        Application.ResourceManager().add_texture(texture);
         m_texture = texture;
     }
 

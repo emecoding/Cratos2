@@ -18,13 +18,13 @@ public class Scene
 
     public void update_gameObjects()
     {
-        Application.application_renderer.render_debug_to_screen();
+        Application.Renderer().render_debug_to_screen();
         for(int i = 0; i < m_gameObjects.size(); i++)
         {
             GameObject gameObject = m_gameObjects.get(i);
             gameObject.update();
-            Application.application_collision_manager.check_for_collision_with_gameObject(gameObject);
-            Application.application_renderer.render_gameObject(gameObject);
+            Application.CollisionManager().check_for_collision_with_gameObject(gameObject);
+            Application.Renderer().render_gameObject(gameObject);
         }
 
     }

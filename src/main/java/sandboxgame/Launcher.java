@@ -1,7 +1,6 @@
 package sandboxgame;
 
 import application.Application;
-import application.applicationSystem.window.Window;
 import application.gameObject.GameObject;
 import application.gameObjectComponent.Camera;
 import application.gameObjectComponent.Collider.BoxCollider;
@@ -22,16 +21,16 @@ public class Launcher
 {
     public static void main(String[] args)
     {
-        Application.application_window = new Window("Sandbox game window", 800, 600);
-        Application.application_window.set_window_hint(GLFW_RESIZABLE, GLFW_FALSE);
-        Application.application_window.set_background_color(0.2f, 0.3f, 0.3f, 1.0f);
+        Application.CreateWindow("Sandbox game", 800, 600);
+        Application.Window().set_window_hint(GLFW_RESIZABLE, GLFW_FALSE);
+        Application.Window().set_background_color(0.2f, 0.3f, 0.3f, 1.0f);
 
-        Application.application_resource_manager.add_resource_folder_to_load("src/main/resources/textures");
-        Application.application_resource_manager.add_resource_folder_to_load("src/main/resources/shaders"); //Shaders has to be stored like in this project
+        Application.ResourceManager().add_resource_folder_to_load("src/main/resources/textures");
+        Application.ResourceManager().add_resource_folder_to_load("src/main/resources/shaders"); //Shaders has to be stored like in this project
 
         Application.initialize();
 
-        Application.application_window.center();
+        Application.Window().center();
 
         Application.create_scene("Sandbox Scene");
         Scene sandbox_scene = Application.get_scene("Sandbox Scene");

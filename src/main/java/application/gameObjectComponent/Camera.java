@@ -13,9 +13,9 @@ public class Camera extends GameObjectComponent
     @Override
     public void initialize()
     {
-        Application.application_renderer.add_camera(this);
+        Application.Renderer().add_camera(this);
         m_view = new Matrix4f();
-        m_ortho_projection = new Matrix4f().ortho(0.0f, Application.application_window.get_width(), Application.application_window.get_height(), 0.0f, -1.0f, 1.0f);
+        m_ortho_projection = new Matrix4f().ortho(0.0f, Application.Window().get_width(), Application.Window().get_height(), 0.0f, -1.0f, 1.0f);
     }
 
     @Override
@@ -42,6 +42,6 @@ public class Camera extends GameObjectComponent
     }
     public Matrix4f get_perspective_projection()
     {
-        return new Matrix4f().perspective((float) Math.toRadians(90.0f), Application.application_window.get_width()/Application.application_window.get_height(), 0.1f, 100.0f);
+        return new Matrix4f().perspective((float) Math.toRadians(90.0f), (float) Application.Window().get_width() /Application.Window().get_height(), 0.1f, 100.0f);
     }
 }

@@ -17,59 +17,71 @@ import java.util.List;
 public class Application
 {
 
-    public static Window application_window = null;
-    public static Renderer application_renderer = new Renderer();
-    public static final ResourceManager application_resource_manager = new ResourceManager();
-    public static final Input application_input = new Input();
-    private static final SceneManager application_scene_manager = new SceneManager();
-    public static final CollisionManager application_collision_manager = new CollisionManager();
+    private static Window ApplicationWindow = null;
+    private static Renderer ApplicationRenderer = new Renderer();
+    private static final ResourceManager ApplicationResourceManager = new ResourceManager();
+    private static final Input ApplicationInput = new Input();
+    private static final SceneManager ApplicationSceneManager = new SceneManager();
+    private static final CollisionManager ApplicationCollisionManager = new CollisionManager();
 
 
     public static void initialize()
     {
-        application_window.initialize();
-        application_resource_manager.initialize();
-        application_renderer.initialize();
-        application_input.initialize();
-
+        ApplicationWindow.initialize();
+        ApplicationResourceManager.initialize();
+        ApplicationRenderer.initialize();
+        ApplicationInput.initialize();
     }
 
     public static void launch()
     {
-        application_scene_manager.initialize_current_scene_gameObjects();
+        ApplicationSceneManager.initialize_current_scene_gameObjects();
 
-        while(!application_window.window_should_close())
+        while(!ApplicationWindow.window_should_close())
         {
             Time.update_time();
-            application_window.clear_window();
-            application_collision_manager.manage_collisions();
-            application_scene_manager.update_current_scene_gameObjects();
-            application_window.swap_buffers();
-            application_window.poll_events();
+            ApplicationWindow.clear_window();
+            ApplicationCollisionManager.manage_collisions();
+            ApplicationSceneManager.update_current_scene_gameObjects();
+            ApplicationWindow.swap_buffers();
+            ApplicationWindow.poll_events();
         }
     }
 
     public static void destroy()
     {
-        application_scene_manager.destroy();
-        application_renderer.destroy();
-        application_resource_manager.destroy();
-        application_window.destroy();
+        ApplicationSceneManager.destroy();
+        ApplicationRenderer.destroy();
+        ApplicationResourceManager.destroy();
+        ApplicationWindow.destroy();
+    }
+
+    public static Window Window() { return ApplicationWindow; }
+    public static Renderer Renderer() { return ApplicationRenderer; }
+    public static ResourceManager ResourceManager() { return ApplicationResourceManager; }
+    public static Input Input() { return ApplicationInput; }
+    public static SceneManager SceneManager() { return ApplicationSceneManager; }
+    public static CollisionManager CollisionManager() { return ApplicationCollisionManager; }
+
+    public static void CreateWindow(String title, int width, int height)
+    {
+        ApplicationWindow = new Window(title, width, height);
     }
 
     public static void terminate_safely()
     {
-        application_window.set_window_should_close(true);
+        ApplicationWindow.set_window_should_close(true);
     }
 
     public static Scene create_scene(String name)
     {
-        return application_scene_manager.create_scene(name);
+        return ApplicationSceneManager.create_scene(name);
     }
-    public static Scene get_scene(String name) { return application_scene_manager.get_scene(name); }
+    public static Scene get_scene(String name) { return ApplicationSceneManager.get_scene(name); }
     public static void add_scene(Scene new_scene)
     {
-        application_scene_manager.add_scene(new_scene);
+        ApplicationSceneManager.add_scene(new_scene);
     }
-    public static List<GameObject> get_every_gameObject_from_scene() { return application_scene_manager.get_every_gameObject_from_scene(); }
+    public static List<GameObject> get_every_gameObject_from_scene() { return ApplicationSceneManager.get_every_gameObject_from_scene(); }
+
 }

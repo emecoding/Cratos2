@@ -14,6 +14,6 @@ public class RectangleCollider extends Collider //RectangleCollider is 2D collid
     @Override
     protected void render_debug_rect()
     {
-        Application.application_renderer.render_debug_rectangle(get_debug_rect());
+        Application.Renderer().render_debug_rectangle(get_debug_rect());
     }
 }

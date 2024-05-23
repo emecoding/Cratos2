@@ -13,7 +13,7 @@ public class Input implements ApplicationSystem
     @Override
     public void initialize()
     {
-        m_window_long = Application.application_window.get_window_long();
+        m_window_long = Application.Window().get_window_long();
     }
 
     @Override
