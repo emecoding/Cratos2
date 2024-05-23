@@ -27,7 +27,7 @@
     - After task 7 update the function names
     - How to name shaders (folder has to contain the word 'shader' and .vs ans .fs endings for the files)
 
-10: Change material to resource
+//10: Change material to resource
 
 11: BoxCollider.RenderDebugRect
 
