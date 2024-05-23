@@ -1,7 +1,7 @@
 package Application.Resource.Shader;
 
 import Application.ApplicationSystem.ResourceManager.ResourceManager;
-import Application.GameObjectComponent.Model.Material;
+import Application.Resource.Material;
 import Application.Resource.Resource;
 import org.joml.Matrix4f;
 import org.joml.Vector4f;

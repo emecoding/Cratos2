@@ -2,6 +2,7 @@ package Application.ApplicationSystem.ResourceManager;
 
 import Application.ApplicationSystem.ApplicationSystem;
 import Application.ApplicationSystem.Debug;
+import Application.Resource.Material;
 import Application.Resource.Texture;
 import Application.Resource.Shader.Shader;
 
@@ -18,6 +19,7 @@ public class ResourceManager implements ApplicationSystem
 
     private List<Shader> m_Shaders = new ArrayList<>();
     private List<Texture> m_Textures = new ArrayList<>();
+    private List<Material> m_Materials = new ArrayList<>();
     private List<String> m_ResourceFoldersToLoad = new ArrayList<>();
 
     @Override
@@ -71,6 +73,21 @@ public class ResourceManager implements ApplicationSystem
         return texture;
     }
     public void AddTexture(Texture texture) { m_Textures.add(texture); }
+    public Material AddMaterial(Material material)
+    {
+        m_Materials.add(material);
+        return material;
+    }
+    public Material GetMaterial(String name)
+    {
+        for(int i = 0; i < m_Materials.size(); i++)
+        {
+            if(m_Materials.get(i).GetName().equals(name))
+                return m_Materials.get(i);
+        }
+        return null;
+    }
+    public int GetAmountOfMaterials() { return m_Materials.size(); }
     public boolean HasTexture(String name)
     {
         for(int i = 0; i < m_Textures.size(); i++)
