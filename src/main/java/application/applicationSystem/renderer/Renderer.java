@@ -110,7 +110,7 @@ public class Renderer implements ApplicationSystem
             transform_2d = transform_2d.translate(new Vector3f(debug_rectangle.x(), debug_rectangle.y(), 0.0f));
             transform_2d = transform_2d.scale(new Vector3f(debug_rectangle.z(), debug_rectangle.w(), 1.0f));
 
-            set_up_current_shader_for_rendering("DEBUG", transform_2d, null);
+            set_up_current_shader_for_rendering("default_debug_shader", transform_2d, null);
             glDrawArrays(GL_LINES, 0, 6);
         }
 
@@ -130,7 +130,7 @@ public class Renderer implements ApplicationSystem
 
         glBindVertexArray(0);
 
-        Shader debug_shader = Application.application_resource_manager.add_shader("DEBUG", "/shaders/default_debug_shader/default_debug_shader.vs", "/shaders/default_debug_shader/default_debug_shader.fs");
+        Shader debug_shader = Application.application_resource_manager.get_shader("default_debug_shader");
         debug_shader.create_default_2D_uniforms();
     }
     private void set_up_sprite_rendering()
@@ -149,12 +149,12 @@ public class Renderer implements ApplicationSystem
 
         glBindVertexArray(0);
 
-        Shader sprite_shader = Application.application_resource_manager.add_shader("DEFAULT_SPRITE", "/shaders/default_sprite_shader/default_sprite_shader.vs", "/shaders/default_sprite_shader/default_sprite_shader.fs");
+        Shader sprite_shader = Application.application_resource_manager.get_shader("default_sprite_shader");
         sprite_shader.create_default_2D_uniforms();
     }
     private void set_up_model_rendering()
     {
-        Shader default_model_shader = Application.application_resource_manager.add_shader("DEFAULT_MODEL", "/shaders/default_model_shader/default_model_shader.vs", "/shaders/default_model_shader/default_model_shader.fs");
+        Shader default_model_shader = Application.application_resource_manager.get_shader("default_model_shader");
         default_model_shader.create_default_3D_uniforms();
     }
     private void set_up_current_shader_for_rendering(String shader_name, Matrix4f transform_2D_matrix, Matrix4f transform_3D_matrix)

@@ -26,12 +26,12 @@ public class Launcher
         Application.application_window.set_window_hint(GLFW_RESIZABLE, GLFW_FALSE);
         Application.application_window.set_background_color(0.2f, 0.3f, 0.3f, 1.0f);
 
+        Application.application_resource_manager.add_resource_folder_to_load("src/main/resources/textures");
+        Application.application_resource_manager.add_resource_folder_to_load("src/main/resources/shaders"); //Shaders has to be stored like in this project
 
         Application.initialize();
 
         Application.application_window.center();
-
-        Application.application_resource_manager.add_texture("TEST_TEXTURE", "src/main/resources/textures/testTexture.png");
 
         Application.create_scene("Sandbox Scene");
         Scene sandbox_scene = Application.get_scene("Sandbox Scene");
@@ -45,7 +45,7 @@ public class Launcher
         sandbox_gameObject.transform.rotation = new Vector3f(180.0f, 0.0f, 180.0f);
         sandbox_gameObject.transform.scale = new Vector3f(0.5f, 0.5f, 0.5f);
 
-        sandbox_gameObject.add_component(ModelLoader.load_model("src/main/resources/models/frank.obj", "DEFAULT_MODEL", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices));
+        sandbox_gameObject.add_component(ModelLoader.load_model("src/main/resources/models/frank.obj", "default_model_shader", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices));
         sandbox_gameObject.add_component(new rotator());
         RigidBody rb1 = (RigidBody) sandbox_gameObject.add_component(new RigidBody());
         rb1.gravity = 1000.0f;
@@ -62,7 +62,7 @@ public class Launcher
         sandbox_gameObject2.transform.scale = new Vector3f(700.0f, 40.0f, 1.0f);
         sandbox_gameObject2.add_component(new RenderObject());
 
-        sandbox_gameObject2.add_component(new Sprite("DEFAULT_SPRITE", "TEST_TEXTURE"));
+        sandbox_gameObject2.add_component(new Sprite("default_sprite_shader", "testTexture02"));
         RigidBody rb2 = (RigidBody) sandbox_gameObject2.add_component(new RigidBody());
         rb2.gravity = 0.0f;
         RectangleCollider rect_collider2 = (RectangleCollider) sandbox_gameObject2.add_component(new RectangleCollider());

@@ -28,8 +28,10 @@ public class Application
     public static void initialize()
     {
         application_window.initialize();
+        application_resource_manager.initialize();
         application_renderer.initialize();
         application_input.initialize();
+
     }
 
     public static void launch()

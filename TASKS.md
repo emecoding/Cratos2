@@ -1,4 +1,4 @@
-1: Resource manager update
+// 1: Resource manager update
     - Load all resources automatically from all the directories set.
 
 //2: Automatic Renderer creation
@@ -13,3 +13,17 @@
 
 5: Sort all cameras
     - Come up with an algorithm that decides the most important camera, and makes the renderer use that.
+
+6: Change all the application.application_systems to getters and setters.
+
+7: Change every function and variable from_this_style_of_names to ThisStyleOfNames
+    - Also the package names LikeThis.
+
+8: More debug messages and errors
+
+9: Update documentation
+    - Add supported file types to documentation (png, obj)
+    - After task 7 update the function names
+    - How to name shaders (folder has to contain the word 'shader' and .vs ans .fs endings for the files)
+
+10: Change material to resource
