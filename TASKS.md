@@ -14,10 +14,11 @@
 5: Sort all cameras
     - Come up with an algorithm that decides the most important camera, and makes the renderer use that.
 
-6: Change all the application.application_systems to getters and setters.
+//6: Change all the Application.application_systems to getters and setters.
 
-7: Change every function and variable from_this_style_of_names to ThisStyleOfNames
+//7: Change every function and variable from_this_style_of_names to ThisStyleOfNames
     - Also the package names LikeThis.
+
 
 8: More debug messages and errors
 
@@ -27,3 +28,7 @@
     - How to name shaders (folder has to contain the word 'shader' and .vs ans .fs endings for the files)
 
 10: Change material to resource
+
+11: BoxCollider.RenderDebugRect
+
+12: Load every resource from path
