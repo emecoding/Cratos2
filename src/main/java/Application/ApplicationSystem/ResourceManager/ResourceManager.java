@@ -9,7 +9,9 @@ import Application.Resource.Shader.Shader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,7 +28,7 @@ public class ResourceManager implements ApplicationSystem
     public void Initialize()
     {
         //TODO Load every texture on initialize
-        load_every_resource_folder();
+        LoadEveryResourceFolder();
     }
     @Override
     public void Destroy()
@@ -153,16 +155,27 @@ public class ResourceManager implements ApplicationSystem
         return lines;
     }
 
-    private void load_every_resource_folder()
+    private void LoadEveryResourceFolder()
     {
         for(int i = 0; i < m_ResourceFoldersToLoad.size(); i++)
         {
+            /*URL url = ResourceManager.class.getResource(m_ResourceFoldersToLoad.get(i));
+            if(url == null)
+            {
+                Debug.Error("No such path as " + m_ResourceFoldersToLoad.get(i));
+                continue;
+            }
+            Debug.Log(url.getPath());
+            File[] files_in_folder = new File(url.getPath()).listFiles();
+            */
+
             File[] files_in_folder = new File(m_ResourceFoldersToLoad.get(i)).listFiles();
             if(files_in_folder == null)
             {
                 Debug.Error("Didn't find resource folder '" + m_ResourceFoldersToLoad.get(i) + "' -> skipping");
                 continue;
             }
+
             for(File file : files_in_folder)
             {
                 //Load shaders
@@ -199,11 +212,12 @@ public class ResourceManager implements ApplicationSystem
         String fragment_shader_path = "";
         for(int i = 0; i < files_in_folder.length; i++)
         {
+            String path = files_in_folder[i].getPath();//.replace("resources"+System.getProperty("file.separator")+"main", "main"+System.getProperty("file.separator")+"resources");
             if(files_in_folder[i].getName().contains("vs"))//vertex shader
-                vertex_shader_path = files_in_folder[i].getPath();
+                vertex_shader_path = path;
 
             if(files_in_folder[i].getName().contains("fs"))//fragment shader
-                fragment_shader_path = files_in_folder[i].getPath();
+                fragment_shader_path = path;
         }
 
         if(vertex_shader_path.equals(""))

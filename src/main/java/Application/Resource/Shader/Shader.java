@@ -45,10 +45,12 @@ public class Shader extends Resource
     private void CreateVertexShader(String vertex_path) throws Exception
     {
         m_VertexShaderID = CreateShader(ResourceManager.ReadFile(vertex_path), GL_VERTEX_SHADER);
+        //m_VertexShaderID = CreateShader(ResourceManager.LoadResourceFromPath(vertex_path), GL_VERTEX_SHADER);
     }
     private void CreateFragmentShader(String fragment_path) throws Exception
     {
         m_FragmentShaderID = CreateShader(ResourceManager.ReadFile(fragment_path), GL_FRAGMENT_SHADER);
+        //m_FragmentShaderID = CreateShader(ResourceManager.LoadResourceFromPath(fragment_path), GL_FRAGMENT_SHADER);
     }
     private int CreateShader(String shader_code, int shader_type) throws Exception
     {

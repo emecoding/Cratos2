@@ -31,4 +31,5 @@
 
 11: BoxCollider.RenderDebugRect
 
-12: Load every resource from path
+//12: Load every resource from path
+    - Not maybe loading from path, but resources can be loaded from anywhere now.
