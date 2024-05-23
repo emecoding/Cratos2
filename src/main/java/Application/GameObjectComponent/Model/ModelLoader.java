@@ -1,6 +1,8 @@
 package Application.GameObjectComponent.Model;
 
+import Application.Application;
 import Application.ApplicationSystem.Debug;
+import Application.Resource.Material;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.*;
 import org.lwjgl.system.MemoryStack;
@@ -136,11 +138,23 @@ public class ModelLoader
     }
     private static Material ProcessMaterial(AIMaterial ai_material, String model_dir)
     {
+
         Material material = new Material();
         try(MemoryStack stack = MemoryStack.stackPush())
         {
+            AIString name = AIString.create();
+            int result = aiGetMaterialString(ai_material, AI_MATKEY_NAME, aiTextureType_NONE, 0, name);
+            if(result == aiReturn_SUCCESS)
+                material.SetMaterialName(name.dataString());
+            else
+            {
+                Debug.Error("Failed to get material's name");
+                material.SetMaterialName("Material" + Application.ResourceManager().GetAmountOfMaterials());
+            }
+
+
             AIColor4D color = AIColor4D.create();
-            int result = aiGetMaterialColor(ai_material, AI_MATKEY_COLOR_DIFFUSE, aiTextureType_NONE, 0, color);
+            result = aiGetMaterialColor(ai_material, AI_MATKEY_COLOR_DIFFUSE, aiTextureType_NONE, 0, color);
 
             if(result == aiReturn_SUCCESS)
                 material.SetDiffuseColor(color.r(), color.g(), color.b(), color.a());
@@ -160,6 +174,7 @@ public class ModelLoader
             }
         }
 
+        Application.ResourceManager().AddMaterial(material);
         return material;
     }
 

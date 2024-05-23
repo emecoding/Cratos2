@@ -1,5 +1,6 @@
 package Application.GameObjectComponent.Model;
 
+import Application.Resource.Material;
 import Application.Utils.Utils;
 import Application.ApplicationSystem.Debug;
 

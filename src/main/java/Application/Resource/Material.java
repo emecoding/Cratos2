@@ -1,9 +1,8 @@
-package Application.GameObjectComponent.Model;
+package Application.Resource;
 
 
 import Application.Application;
 import Application.ApplicationSystem.Debug;
-import Application.Resource.Texture;
 import Application.Resource.Shader.Shader;
 import org.joml.Vector4f;
 
@@ -12,7 +11,7 @@ import java.io.File;
 import static Application.Resource.Shader.UniformConstants.DIFFUSE_COLOR;
 import static Application.Resource.Shader.UniformConstants.HAS_TEXTURE;
 
-public class Material
+public class Material extends Resource
 {
     private Vector4f m_DiffuseColor = new Vector4f(0.0f, 0.0f, 0.0f, 0.0f);
     private String m_TexturePath;
@@ -22,6 +21,11 @@ public class Material
     public Material()
     {
 
+    }
+
+    public void SetMaterialName(String name)
+    {
+        SetName(name);
     }
 
     public void SetDiffuseColor(float x, float y, float z, float w)
