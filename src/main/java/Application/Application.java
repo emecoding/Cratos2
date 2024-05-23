@@ -69,15 +69,4 @@ public class Application
         ApplicationWindow.SetWindowShouldClose(true);
     }
 
-    /*public static Scene create_scene(String name)
-    {
-        return ApplicationSceneManager.create_scene(name);
-    }
-    public static Scene get_scene(String name) { return ApplicationSceneManager.get_scene(name); }
-    public static void add_scene(Scene new_scene)
-    {
-        ApplicationSceneManager.add_scene(new_scene);
-    }
-    public static List<GameObject> get_every_gameObject_from_scene() { return ApplicationSceneManager.get_every_gameObject_from_scene(); }*/
-
 }
