@@ -1,6 +1,7 @@
 package Application.ApplicationSystem.SceneManager;
 
 import Application.ApplicationSystem.ApplicationSystem;
+import Application.ApplicationSystem.Debug;
 import Application.GameObject.GameObject;
 import Application.Scene.Scene;
 
@@ -31,6 +32,11 @@ public class SceneManager implements ApplicationSystem
     }
     public void InitializeCurrentSceneGameObjects()
     {
+        if(m_Scenes.size() == 0)
+        {
+            Debug.Error("No scenes created!");
+            return;
+        }
         m_Scenes.get(m_CurrentSceneIndex).Initialize_gameObjects();
     }
 
