@@ -1,4 +1,4 @@
-package Application.ApplicationSystem.Render;
+package Application.ApplicationSystem.Renderer;
 
 import Application.Application;
 import Application.Utils.Utils;
@@ -184,9 +184,14 @@ public class Renderer implements ApplicationSystem
                     current_shader.SetUniform(GAME_OBJECT_3D_TRANSFORM, transform_3D_matrix);
                 }
 
-                case CAMERA_VIEW ->
+                case CAMERA_2D_VIEW ->
                 {
-                    current_shader.SetUniform(CAMERA_VIEW, m_CurrentCamera.GetView());
+                    current_shader.SetUniform(CAMERA_2D_VIEW, m_CurrentCamera.Get2DView());
+                }
+
+                case CAMERA_3D_VIEW ->
+                {
+                    current_shader.SetUniform(CAMERA_3D_VIEW, m_CurrentCamera.Get3DView());
                 }
 
                 case ORTHOGRAPHIC_PROJECTION ->

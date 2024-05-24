@@ -105,13 +105,13 @@ public class Shader extends Resource
     public void CreateDefault2DUniforms()
     {
         CreateUniform(GAME_OBJECT_2D_TRANSFORM);
-        CreateUniform(CAMERA_VIEW);
+        CreateUniform(CAMERA_2D_VIEW);
         CreateUniform(ORTHOGRAPHIC_PROJECTION);
     }
     public void CreateDefault3DUniforms()
     {
         CreateUniform(GAME_OBJECT_3D_TRANSFORM);
-        CreateUniform(CAMERA_VIEW);
+        CreateUniform(CAMERA_3D_VIEW);
         CreateUniform(PERSPECTIVE_PROJECTION);
         Material.CREATE_DEFAULT_UNIFORMS(this);
     }
