@@ -4,7 +4,7 @@ package Application;
 import Application.Utils.Time;
 import Application.ApplicationSystem.CollisionManager.CollisionManager;
 import Application.ApplicationSystem.Input.Input;
-import Application.ApplicationSystem.Render.Renderer;
+import Application.ApplicationSystem.Renderer.Renderer;
 import Application.ApplicationSystem.ResourceManager.ResourceManager;
 import Application.ApplicationSystem.SceneManager.SceneManager;
 import Application.ApplicationSystem.Window.Window;

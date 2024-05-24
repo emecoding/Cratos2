@@ -2,17 +2,14 @@ package SandboxGame;
 
 import Application.Application;
 import Application.GameObject.GameObject;
-import Application.GameObjectComponent.Camera;
+import Application.GameObjectComponent.*;
 import Application.GameObjectComponent.Collider.BoxCollider;
 import Application.GameObjectComponent.Collider.RectangleCollider;
 import Application.GameObjectComponent.Model.ModelLoader;
-import Application.GameObjectComponent.RenderObject;
-import Application.GameObjectComponent.RigidBody;
-import Application.GameObjectComponent.Sprite;
 import Application.Scene.Scene;
 import org.joml.Vector3f;
 
-import static Application.GameObjectComponent.Camera.DEFAULT_CAMERA_Z;
+import static Application.GameObjectComponent.Camera.DEFAULT_CAMERA_3D_Z;
 import static org.lwjgl.assimp.Assimp.aiProcess_JoinIdenticalVertices;
 import static org.lwjgl.assimp.Assimp.aiProcess_Triangulate;
 import static org.lwjgl.glfw.GLFW.*;
@@ -32,12 +29,17 @@ public class Launcher
 
         Application.Window().Center();
 
+        Application.Input().SetCursorPositionOnWindow(400, 300);
+        Application.Input().SetCursorInputMode(GLFW_CURSOR_DISABLED);
+
         Application.SceneManager().CreateScene("Sandbox Scene");
         Scene sandbox_scene = Application.SceneManager().GetScene("Sandbox Scene");
 
         GameObject sandbox_camera = sandbox_scene.CreateGameObject();
-        sandbox_camera.m_Transform.Position.z = DEFAULT_CAMERA_Z;
+        sandbox_camera.m_Transform.Position.z = DEFAULT_CAMERA_3D_Z;
         sandbox_camera.AddComponent(new Camera());
+        CameraMovement camMovement = (CameraMovement) sandbox_camera.AddComponent(new CameraMovement());
+        camMovement.SetSpeed(1000.0f);
 
         GameObject sandbox_gameObject = sandbox_scene.CreateGameObject();
         sandbox_gameObject.m_Transform.Position = new Vector3f(0.0f, 0.0f, 0.0f);
