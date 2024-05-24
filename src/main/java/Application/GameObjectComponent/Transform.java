@@ -34,7 +34,7 @@ public class Transform extends GameObjectComponent
 
     }
 
-    public Matrix4f get_transform_2D_matrix()
+    public Matrix4f GetTransform2DMatrix()
     {
         Matrix4f mat4 = new Matrix4f();
         mat4 = mat4.translate(new Vector3f(Position.x, Position.y, 0.0f));
@@ -42,7 +42,7 @@ public class Transform extends GameObjectComponent
         return mat4;
     }
 
-    public Matrix4f get_transform_3D_matrix()
+    public Matrix4f GetTransform3DMatrix()
     {
         Matrix4f mat4 = new Matrix4f();
         mat4 = mat4.translate(new Vector3f(Position.x, Position.y, 0.0f));

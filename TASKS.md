@@ -29,7 +29,8 @@
 
 //10: Change material to resource
 
-11: BoxCollider.RenderDebugRect
+//11: BoxCollider.RenderDebugRect
+    - Just a 3D model rendering on top of the object
 
 //12: Load every resource from path
     - Not maybe loading from path, but resources can be loaded from anywhere now.
@@ -37,3 +38,5 @@
 //13: Camera Yaw, Pitch, Raw
 
 14: https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling
+
+15: Implement basic 3D collision detection.
