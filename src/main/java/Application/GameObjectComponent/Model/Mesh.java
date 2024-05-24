@@ -34,14 +34,15 @@ public class Mesh
         InitializeMesh();
     }
 
-    public void Render(String shder_name)
+    public void Render(String shder_name, int renderMode)
     {
         glBindVertexArray(VAO);
         m_material.Use(shder_name);
-        glDrawElements(GL_TRIANGLES, m_NumVertices, GL_UNSIGNED_INT, 0);
+        glDrawElements(renderMode, m_NumVertices, GL_UNSIGNED_INT, 0);
     }
 
     public void SetMaterial(Material material) { m_material = material; }
+    public Material GetMaterial() { return m_material; }
 
     private void InitializeMesh()
     {

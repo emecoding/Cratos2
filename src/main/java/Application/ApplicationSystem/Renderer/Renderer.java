@@ -1,6 +1,9 @@
 package Application.ApplicationSystem.Renderer;
 
 import Application.Application;
+import Application.GameObjectComponent.Collider.BoxCollider;
+import Application.GameObjectComponent.Model.Model;
+import Application.GameObjectComponent.Model.ModelLoader;
 import Application.Utils.Utils;
 import Application.ApplicationSystem.ApplicationSystem;
 import Application.ApplicationSystem.Debug;
@@ -18,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 import static Application.Resource.Shader.UniformConstants.*;
+import static org.lwjgl.assimp.Assimp.aiProcess_JoinIdenticalVertices;
+import static org.lwjgl.assimp.Assimp.aiProcess_Triangulate;
 import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
@@ -31,6 +36,9 @@ public class Renderer implements ApplicationSystem
     private Camera m_CurrentCamera = null;
 
     private List<Vector4f> m_DebugRectangles = new ArrayList<>();
+    private List<BoxCollider> m_DebugCollisionBoxes = new ArrayList<>();
+
+    private Model m_CollisionDebugBox = null;
 
     private int m_DebugVAO, m_DebugVBO;
     private int m_RectangleVerticesStride = 4 * Float.BYTES;
@@ -55,6 +63,10 @@ public class Renderer implements ApplicationSystem
         SetUpDebugRendering();
         SetUpSpriteRendering();
         SetUpModelRendering();
+
+        m_CollisionDebugBox = ModelLoader.LoadModel("src/main/resources/models/CollisionBoxModel.obj", "default_model_shader", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
+        m_CollisionDebugBox.SetRenderMode(GL_LINES);
+        m_CollisionDebugBox.SetDiffuseColorForEveryMesh(0.0f, 1.0f, 0.0f, 1.0f);
     }
 
     @Override
@@ -99,6 +111,7 @@ public class Renderer implements ApplicationSystem
     {
         m_DebugRectangles.add(rectangle);
     }
+    public void RenderDebugBox(BoxCollider collider) { m_DebugCollisionBoxes.add(collider); }
     public void RenderDebugToScreen()
     {
         glBindVertexArray(m_DebugVAO);
@@ -112,6 +125,17 @@ public class Renderer implements ApplicationSystem
 
             SetUpCurrentShaderForRendering("default_debug_shader", transform_2d, null);
             glDrawArrays(GL_LINES, 0, 6);
+        }
+
+        glBindVertexArray(0);
+
+        for(int i = 0; i < m_DebugCollisionBoxes.size(); i++)
+        {
+            BoxCollider collider = m_DebugCollisionBoxes.get(i);
+
+            SetUpCurrentShaderForRendering("default_model_shader", null, collider.GetTransformMatrix());
+            m_CollisionDebugBox.Render();
+
         }
 
         m_DebugRectangles.clear();
@@ -209,7 +233,7 @@ public class Renderer implements ApplicationSystem
     }
     private void SetUpCurrentShaderForRendering(GameObject gameObject, String shader_name)
     {
-        SetUpCurrentShaderForRendering(shader_name, gameObject.m_Transform.get_transform_2D_matrix(), gameObject.m_Transform.get_transform_3D_matrix());
+        SetUpCurrentShaderForRendering(shader_name, gameObject.m_Transform.GetTransform2DMatrix(), gameObject.m_Transform.GetTransform3DMatrix());
     }
     private void StopRenderingCurrentShader()
     {

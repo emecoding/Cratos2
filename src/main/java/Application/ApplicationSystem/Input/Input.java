@@ -47,7 +47,6 @@ public class Input implements ApplicationSystem
     public void SetCursorPositionOnWindow(float x, float y)
     {
         Vector2i windowPos = Application.Window().GetPosition();
-        System.out.println(windowPos.x);
         SetCursorPosition(windowPos.x + x, windowPos.y + y);
     }
 }

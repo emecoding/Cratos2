@@ -50,10 +50,15 @@ public class Material extends Resource
         if(m_Shader == null)
             m_Shader = Application.ResourceManager().GetShader(shader_name);
         m_Shader.SetUniform(DIFFUSE_COLOR, m_DiffuseColor);
+
         if(m_Texture != null)
         {
             m_Shader.SetUniform(HAS_TEXTURE, 1);
             m_Texture.Use();
+        }
+        else
+        {
+            m_Shader.SetUniform(HAS_TEXTURE, 0);
         }
 
     }
