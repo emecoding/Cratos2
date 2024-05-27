@@ -3,6 +3,7 @@ package Application.GameObjectComponent.Model;
 import Application.Application;
 import Application.ApplicationSystem.Debug;
 import Application.Resource.Material;
+import Application.Resource.Model;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.*;
 import org.lwjgl.system.MemoryStack;
@@ -18,7 +19,7 @@ import static org.lwjgl.assimp.Assimp.*;
 
 public class ModelLoader
 {
-    public static Model LoadModel(String path, String shaderName, int assimpFlags)
+    public static Model LoadModel(String name, String path, String shaderName, int assimpFlags)
     {
         File file = new File(path);
         if(!file.exists())
@@ -44,7 +45,7 @@ public class ModelLoader
             material_list.add(ProcessMaterial(ai_material, model_dir));
         }
 
-        Model model = new Model(shaderName);
+        Model model = new Model(name, shaderName);
 
         int num_meshes = ai_scene.mNumMeshes();
         PointerBuffer ai_meshes = ai_scene.mMeshes();
