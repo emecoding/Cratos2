@@ -8,6 +8,7 @@
     - Application.set_config_file
     - For example: Application.create_config_window
     - Config file reader that can be used from anywhere the program.
+    - Cratos .JAR file location -> access the models?
 
 4: Text Rendering
 
@@ -31,6 +32,7 @@
 
 //11: BoxCollider.RenderDebugRect
     - Just a 3D model rendering on top of the object
+    - Find the 3D model with config file reader and .JAR file location.
 
 //12: Load every resource from path
     - Not maybe loading from path, but resources can be loaded from anywhere now.
@@ -40,3 +42,10 @@
 14: https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling
 
 15: Implement basic 3D collision detection.
+
+16: From task 11:
+    - Make the transform matrix scalable.
+    - Currently other projects can not find the model.
+    - Making model also a resource.
+
+17: Make current Model class extend Resource and make a new component called ModelRenderer which extends RenderComponent

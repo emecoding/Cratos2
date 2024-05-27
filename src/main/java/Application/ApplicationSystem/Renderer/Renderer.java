@@ -2,7 +2,7 @@ package Application.ApplicationSystem.Renderer;
 
 import Application.Application;
 import Application.GameObjectComponent.Collider.BoxCollider;
-import Application.GameObjectComponent.Model.Model;
+import Application.Resource.Model;
 import Application.GameObjectComponent.Model.ModelLoader;
 import Application.Utils.Utils;
 import Application.ApplicationSystem.ApplicationSystem;
@@ -64,7 +64,7 @@ public class Renderer implements ApplicationSystem
         SetUpSpriteRendering();
         SetUpModelRendering();
 
-        m_CollisionDebugBox = ModelLoader.LoadModel("src/main/resources/models/CollisionBoxModel.obj", "default_model_shader", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
+        m_CollisionDebugBox = Application.ResourceManager().GetModel("CollisionBoxModel");//ModelLoader.LoadModel("COLLISIONBOX", "src/main/resources/models/CollisionBoxModel.obj", "default_model_shader", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
         m_CollisionDebugBox.SetRenderMode(GL_LINES);
         m_CollisionDebugBox.SetDiffuseColorForEveryMesh(0.0f, 1.0f, 0.0f, 1.0f);
     }

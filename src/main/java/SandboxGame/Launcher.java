@@ -23,7 +23,10 @@ public class Launcher
         Application.Window().SetBackgroundColor(0.2f, 0.3f, 0.3f, 1.0f);
 
         Application.ResourceManager().AddResourceFolderToLoad("src/main/resources/textures");
-        Application.ResourceManager().AddResourceFolderToLoad("src/main/resources/shaders"); //Shaders has to be stored like in this project
+        Application.ResourceManager().AddResourceFolderToLoad("src/main/resources/shaders");//Shaders has to be stored like in this project
+        Application.ResourceManager().AddResourceFolderToLoad("src/main/resources/models");
+        Application.ResourceManager().SetAssimpFlags(aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
+
 
         Application.Initialize();
 
@@ -46,7 +49,8 @@ public class Launcher
         sandbox_gameObject.m_Transform.Rotation = new Vector3f(180.0f, 0.0f, 180.0f);
         sandbox_gameObject.m_Transform.Scale = new Vector3f(0.5f, 0.5f, 0.5f);
 
-        sandbox_gameObject.AddComponent(ModelLoader.LoadModel("src/main/resources/models/frank.obj", "default_model_shader", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices));
+        //sandbox_gameObject.AddComponent(new ModelRenderer(ModelLoader.LoadModel("FRANK", "src/main/resources/models/frank.obj", "default_model_shader", aiProcess_Triangulate | aiProcess_JoinIdenticalVertices)));
+        sandbox_gameObject.AddComponent(new ModelRenderer(Application.ResourceManager().GetModel("frank")));
         sandbox_gameObject.AddComponent(new rotator());
         RigidBody rb1 = (RigidBody) sandbox_gameObject.AddComponent(new RigidBody());
         rb1.Gravity = 1000.0f;

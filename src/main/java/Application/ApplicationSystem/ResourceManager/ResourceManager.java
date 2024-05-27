@@ -2,16 +2,16 @@ package Application.ApplicationSystem.ResourceManager;
 
 import Application.ApplicationSystem.ApplicationSystem;
 import Application.ApplicationSystem.Debug;
+import Application.GameObjectComponent.Model.ModelLoader;
 import Application.Resource.Material;
+import Application.Resource.Model;
 import Application.Resource.Texture;
 import Application.Resource.Shader.Shader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +22,9 @@ public class ResourceManager implements ApplicationSystem
     private List<Shader> m_Shaders = new ArrayList<>();
     private List<Texture> m_Textures = new ArrayList<>();
     private List<Material> m_Materials = new ArrayList<>();
+    private List<Model> m_Models = new ArrayList<>();
     private List<String> m_ResourceFoldersToLoad = new ArrayList<>();
+    private int m_AssimpFlags;
 
     @Override
     public void Initialize()
@@ -89,6 +91,23 @@ public class ResourceManager implements ApplicationSystem
         }
         return null;
     }
+    public Model AddModel(String name, String path, String shaderName)
+    {
+        Model model = ModelLoader.LoadModel(name, path, shaderName, m_AssimpFlags);
+        m_Models.add(model);
+        return model;
+    }
+
+    public Model GetModel(String name)
+    {
+        for(int i = 0; i < m_Models.size(); i++)
+        {
+            if(m_Models.get(i).GetName().equals(name))
+                return m_Models.get(i);
+        }
+        return null;
+    }
+
     public int GetAmountOfMaterials() { return m_Materials.size(); }
     public boolean HasTexture(String name)
     {
@@ -99,7 +118,7 @@ public class ResourceManager implements ApplicationSystem
         }
         return false;
     }
-
+    public void SetAssimpFlags(int flags) { m_AssimpFlags = flags; }
     public static String LoadResourceFromPath(String path) throws Exception
     {
         String result = "";
@@ -159,15 +178,6 @@ public class ResourceManager implements ApplicationSystem
     {
         for(int i = 0; i < m_ResourceFoldersToLoad.size(); i++)
         {
-            /*URL url = ResourceManager.class.getResource(m_ResourceFoldersToLoad.get(i));
-            if(url == null)
-            {
-                Debug.Error("No such path as " + m_ResourceFoldersToLoad.get(i));
-                continue;
-            }
-            Debug.Log(url.getPath());
-            File[] files_in_folder = new File(url.getPath()).listFiles();
-            */
 
             File[] files_in_folder = new File(m_ResourceFoldersToLoad.get(i)).listFiles();
             if(files_in_folder == null)
@@ -194,7 +204,11 @@ public class ResourceManager implements ApplicationSystem
                     case "png":
                         AddTexture(splitted_file_name[0], file.getPath());
                         break;
-
+                    case "obj":
+                        AddModel(splitted_file_name[0], file.getPath(), "default_model_shader");
+                        break;
+                    case "mtl":
+                        break;
                     default:
                         Debug.Error("File type '." + file_type + "' is not currently supported. Check out the supported file types from the documentation.");
                         break;
