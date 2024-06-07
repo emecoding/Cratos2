@@ -63,6 +63,7 @@ public class Launcher
         sandbox_gameObject2.m_Transform.Position = new Vector3f(100.0f, 500.0f, 1.0f);
         sandbox_gameObject2.m_Transform.Scale = new Vector3f(32, 32, 1.0f);
         sandbox_gameObject2.AddComponent(new RenderObject());
+        sandbox_gameObject2.AddComponent(new Sprite("default_sprite_shader"));
 
         SpriteSheet testSpriteSheet = SpriteSheet.LoadSpriteSheet("src/main/resources/textures/testTexture04.png", 32, 32);
 

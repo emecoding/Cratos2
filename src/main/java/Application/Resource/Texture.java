@@ -36,6 +36,8 @@ public class Texture extends Resource
         glBindTexture(GL_TEXTURE_2D, m_ID);
     }
 
+    public int GetID() { return m_ID; }
+
     public static Texture CreateTexture3D(String name, String path)
     {
         Texture texture = new Texture(name, path);

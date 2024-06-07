@@ -16,6 +16,7 @@ import static org.lwjgl.opengl.GL11C.glBindTexture;
 public class Animator2D extends RenderComponent
 {
     private SpriteSheet m_SpriteSheet;
+    private Sprite m_Sprite = null;
 
     private Map<String, List<SpriteSheetTexture>> m_Animations;
 
@@ -68,6 +69,16 @@ public class Animator2D extends RenderComponent
     @Override
     public void Render()
     {
+        if(m_Sprite == null)
+        {
+            m_Sprite = (Sprite) m_Parent.GetComponent(Sprite.class);
+            if(m_Sprite == null)
+            {
+                Debug.Error("No sprite component found from gameObject with Animator2D. Please add one.");
+                return;
+            }
+        }
+
         if(m_Animations.size() <= 0)
         {
             Debug.Error("No animations set.");
@@ -86,10 +97,6 @@ public class Animator2D extends RenderComponent
             }
         }
 
-
-        glBindTexture(GL_TEXTURE_2D, m_Animations.get(m_CurrentAnimationName).get(m_CurrentFrameIndex).GetID());
-        Application.Renderer().RenderRectangle();
-        glBindTexture(GL_TEXTURE_2D, 0);
-
+        m_Sprite.SetTexture(m_Animations.get(m_CurrentAnimationName).get(m_CurrentFrameIndex).GetID());
     }
 }
