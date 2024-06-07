@@ -99,6 +99,7 @@ public class Texture extends Resource
             IntBuffer c = stack.mallocInt(1);
 
             buffer = STBImage.stbi_load(path, w, h, c, 4);
+
             if(buffer == null)
                 Debug.Error("Failed to load texture '" + path + "': " + STBImage.stbi_failure_reason());
 
