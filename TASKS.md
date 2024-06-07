@@ -9,6 +9,7 @@
     - For example: Application.create_config_window
     - Config file reader that can be used from anywhere the program.
     - Cratos .JAR file location -> access the models?
+    - Tells the program which textures are sprite sheets and which are not. 
 
 4: Text Rendering
 
@@ -49,3 +50,6 @@
     - Making model also a resource.
 
 17: Make current Model class extend Resource and make a new component called ModelRenderer which extends RenderComponent
+
+//18: Sprite sheets
+    - Also 2D sprite sheet animations
