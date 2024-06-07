@@ -10,4 +10,6 @@ public class UniformConstants
     public static final String PERSPECTIVE_PROJECTION = "perspective_projection";
     public static final String DIFFUSE_COLOR = "diffuse_color";
     public static final String HAS_TEXTURE = "has_texture";
+    public static final String FLIP_HORIZONTALLY = "flip_horizontally";
+    public static final String FLIP_VERTICALLY = "flip_vertically";
 }

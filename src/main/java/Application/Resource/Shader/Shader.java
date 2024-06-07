@@ -102,11 +102,20 @@ public class Shader extends Resource
     {
         glUniform1i(m_Uniforms.get(uniform), value);
     }
+    public void SetUniform(String uniform, boolean value)
+    {
+        if(value)
+            SetUniform(uniform, 1);
+        else
+            SetUniform(uniform, 0);
+    }
     public void CreateDefault2DUniforms()
     {
         CreateUniform(GAME_OBJECT_2D_TRANSFORM);
         CreateUniform(CAMERA_2D_VIEW);
         CreateUniform(ORTHOGRAPHIC_PROJECTION);
+        CreateUniform(FLIP_HORIZONTALLY);
+        CreateUniform(FLIP_VERTICALLY);
     }
     public void CreateDefault3DUniforms()
     {
@@ -116,6 +125,7 @@ public class Shader extends Resource
         Material.CREATE_DEFAULT_UNIFORMS(this);
     }
     public Map<String, Integer> GetSetUniforms() { return m_Uniforms; }
+    public boolean HasUniform(String uniform) { return m_Uniforms.containsKey(uniform); }
     public void Bind()
     {
         glUseProgram(m_ProgramID);

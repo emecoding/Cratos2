@@ -53,3 +53,5 @@
 
 //18: Sprite sheets
     - Also 2D sprite sheet animations
+
+//19: Flipping sprites

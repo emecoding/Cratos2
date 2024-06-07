@@ -42,6 +42,8 @@ public class SpriteSheet extends Resource
         return textures;
     }
 
+    public int AmountOfFrames() { return m_Textures.size(); }
+
     public static SpriteSheet LoadSpriteSheet(String path, int spriteWidth, int spriteHeight)
     {
         List<SpriteSheetTexture> textures = new ArrayList<>();
