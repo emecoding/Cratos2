@@ -60,15 +60,15 @@ public class Launcher
         bxc.RenderDebugRect(true);
 
         GameObject sandbox_gameObject2 = sandbox_scene.CreateGameObject();
-        sandbox_gameObject2.m_Transform.Position = new Vector3f(100.0f, 500.0f, 1.0f);
+        sandbox_gameObject2.m_Transform.Position = new Vector3f(100.0f, 300.0f, 1.0f);
         sandbox_gameObject2.m_Transform.Scale = new Vector3f(32, 32, 1.0f);
         sandbox_gameObject2.AddComponent(new RenderObject());
         sandbox_gameObject2.AddComponent(new Sprite("default_sprite_shader"));
 
-        SpriteSheet testSpriteSheet = SpriteSheet.LoadSpriteSheet("src/main/resources/textures/testTexture04.png", 32, 32);
+        SpriteSheet testSpriteSheet = SpriteSheet.LoadSpriteSheet("src/main/resources/textures/testTexture05.png", 32, 32);
 
         Animator2D animator2D = (Animator2D) sandbox_gameObject2.AddComponent(new Animator2D("default_sprite_shader", testSpriteSheet));
-        animator2D.SetAnimation("test", 0, 22);
+        animator2D.SetAnimation("test", 0, testSpriteSheet.AmountOfFrames()-1);
         animator2D.SetCurrentAnimation("test");
         animator2D.SetFrameTime(0.1);
         animator2D.SetFrameRate(700.0);

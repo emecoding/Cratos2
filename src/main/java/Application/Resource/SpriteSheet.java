@@ -10,7 +10,11 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_S;
 import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
+import static org.lwjgl.opengl.GL13C.GL_CLAMP_TO_BORDER;
+import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 import static org.lwjgl.opengl.GL30C.glGenerateMipmap;
 
 public class SpriteSheet extends Resource
@@ -46,51 +50,39 @@ public class SpriteSheet extends Resource
 
     public static SpriteSheet LoadSpriteSheet(String path, int spriteWidth, int spriteHeight)
     {
+        //First pixel has to be at X=0
+        //Every sprite has to be with offset of the spriteWidth
+
         List<SpriteSheetTexture> textures = new ArrayList<>();
         SpriteSheet spriteSheet = new SpriteSheet();
 
         try
         {
-            File img = new File(path);
-            BufferedImage bufferedImage = ImageIO.read(img);
+            File imgFile = new File(path);
+            BufferedImage bufferedImage = ImageIO.read(imgFile);
 
             int spriteSheetWidth = bufferedImage.getWidth();
             int spriteSheetHeight = bufferedImage.getHeight();
 
-            int X = 0;
-            int Y = 0;
-
-            for(int x = 0; x < spriteSheetWidth; x++)
+            for(int y = 0; y < spriteSheetHeight/spriteHeight; y++)
             {
-                for(int y = 0; y < spriteSheetHeight; y++)
+                for(int x = 0; x < spriteSheetWidth/spriteWidth; x++)
                 {
-                    BufferedImage IMAGE = bufferedImage.getSubimage(X, Y, spriteWidth, spriteHeight);
-                    if(ImageIsBlank(IMAGE))
-                    {
-                        X += spriteWidth;
-                        if(X >= spriteSheetWidth)
-                        {
-                            X = 0;
-                            Y += spriteHeight;
-                        }
-                        if(Y >= spriteSheetHeight)
-                        {
-                            spriteSheet.SetSprites(textures);
-                            return spriteSheet;
-                        }
-                    }
+                    int Y = y*spriteHeight;
+                    int X = x*spriteWidth;
 
-                    int IMAGE_WIDTH = IMAGE.getWidth();
-                    int IMAGE_HEIGHT = IMAGE.getHeight();
-                    int pixels[] = new int[IMAGE_WIDTH * IMAGE_HEIGHT];
-                    IMAGE.getRGB(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT, pixels, 0, IMAGE_HEIGHT);
-                    ByteBuffer buffer = ByteBuffer.allocateDirect(IMAGE_WIDTH*IMAGE_HEIGHT*4);
+                    BufferedImage subImage = bufferedImage.getSubimage(X, Y, spriteWidth, spriteHeight);
+                    if(ImageIsBlank(subImage))
+                        continue;
 
-                    for(int h = 0; h < IMAGE_HEIGHT; h++)
+                    int pixels[] = subImage.getRGB(0, 0, spriteWidth, spriteHeight, null, 0, spriteWidth);
+                    ByteBuffer buffer = ByteBuffer.allocateDirect(pixels.length*4); //*4 because RGBA
+
+                    for(int h = 0; h < spriteHeight; h++)
                     {
-                        for(int w = 0; w < IMAGE_HEIGHT; w++)
+                        for(int w = 0; w < spriteWidth; w++)
                         {
-                            int pixel = pixels[h * IMAGE_WIDTH + w];
+                            int pixel = pixels[h * spriteWidth + w];
 
                             buffer.put((byte) ((pixel >> 16) & 0xFF));
                             buffer.put((byte) ((pixel >> 8) & 0xFF));
@@ -99,33 +91,28 @@ public class SpriteSheet extends Resource
                         }
                     }
 
+
                     buffer.flip();
 
                     int texture = glGenTextures();
 
                     glBindTexture(GL_TEXTURE_2D, texture);
-                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, IMAGE_WIDTH, IMAGE_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, spriteWidth, spriteHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
                     glGenerateMipmap(GL_TEXTURE_2D);
 
-                    textures.add(new SpriteSheetTexture(texture, X, Y));
+                    textures.add(new SpriteSheetTexture(texture, x, y));
 
                     glBindTexture(GL_TEXTURE_2D, 0);
-
-                    X += spriteWidth;
-                    if(X >= spriteSheetWidth)
-                    {
-                        X = 0;
-                        Y += spriteHeight;
-                    }
-                    if(Y >= spriteSheetHeight)
-                    {
-                        x = spriteSheetWidth;
-                        y = spriteSheetHeight;
-                    }
                 }
             }
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             Debug.Error("Failed to load sprite sheet from path '" + path + "'");
             e.printStackTrace();
