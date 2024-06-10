@@ -56,4 +56,13 @@
 
 //19: Flipping sprites
 
-20: Redo Animator2D
+//20: Redo Animator2D
+
+//21: Tags for GameObject
+    -GameObject.m_Tag = "Example Tag"
+    -Scene.FindGameObjectWithTag(String tag)
+    -Also tasks 22 and 23.
+
+//22: Enabling GL_DEPTH_TEST only when user wants to.
+
+//23: Texture.GetWidth() and Texture.GetHeight()

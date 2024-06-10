@@ -47,8 +47,8 @@ public class Sprite extends RenderComponent
         m_Texture = ID;
     }
 
-    public void FlipHorizontally() { m_FlipHorizontally = true; }
-    public void FlipVertically() { m_FlipVertically = true; }
+    public void FlipHorizontally() { m_FlipHorizontally = !m_FlipHorizontally; }
+    public void FlipVertically() { m_FlipVertically = !m_FlipVertically; }
 
     public boolean IsFlippedHorizontally() { return m_FlipHorizontally; }
     public boolean IsFlippedVertically() { return m_FlipVertically; }

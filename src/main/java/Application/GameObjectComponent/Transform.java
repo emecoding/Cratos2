@@ -38,6 +38,15 @@ public class Transform extends GameObjectComponent
     {
         Matrix4f mat4 = new Matrix4f();
         mat4 = mat4.translate(new Vector3f(Position.x, Position.y, 0.0f));
+
+        mat4 = mat4.translate(new Vector3f(0.5f * Scale.x, 0.5f * Scale.y, 0.0f));
+
+        mat4 = mat4.rotate(Rotation.x, new Vector3f(1.0f, 0.0f, 0.0f));
+        mat4 = mat4.rotate(Rotation.y, new Vector3f(0.0f, 1.0f, 0.0f));
+        mat4 = mat4.rotate(Rotation.z, new Vector3f(0.0f, 0.0f, 1.0f));
+
+        mat4 = mat4.translate(new Vector3f(-0.5f * Scale.x, -0.5f * Scale.y, 0.0f));
+
         mat4 = mat4.scale(this.Scale);
         return mat4;
     }

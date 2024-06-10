@@ -14,6 +14,7 @@ public class GameObject
 {
     public Transform m_Transform;
     public List<GameObjectComponent> m_Components = new ArrayList<GameObjectComponent>();
+    public String m_Tag = "";
 
     public GameObject()
     {
