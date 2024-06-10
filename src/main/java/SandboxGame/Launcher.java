@@ -14,6 +14,7 @@ import static Application.GameObjectComponent.Camera.DEFAULT_CAMERA_3D_Z;
 import static org.lwjgl.assimp.Assimp.aiProcess_JoinIdenticalVertices;
 import static org.lwjgl.assimp.Assimp.aiProcess_Triangulate;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11C.GL_DEPTH_TEST;
 
 public class Launcher
 {
@@ -28,6 +29,7 @@ public class Launcher
         Application.ResourceManager().AddResourceFolderToLoad("src/main/resources/models");
         Application.ResourceManager().SetAssimpFlags(aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
 
+        Application.Renderer().AddGLFlagToEnable(GL_DEPTH_TEST);
 
         Application.Initialize();
 

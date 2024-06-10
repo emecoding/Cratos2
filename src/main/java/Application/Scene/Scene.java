@@ -1,6 +1,7 @@
 package Application.Scene;
 
 import Application.Application;
+import Application.ApplicationSystem.Debug;
 import Application.GameObject.GameObject;
 
 import java.util.ArrayList;
@@ -58,4 +59,15 @@ public class Scene
 
     public String GetName() { return m_Name; }
     public List<GameObject> GetGameObjects() { return m_GameObjects; }
+    public GameObject FindGameObjectWithTag(String tag)
+    {
+        for(GameObject gameObject : m_GameObjects)
+        {
+            if(gameObject.m_Tag.equals(tag))
+                return gameObject;
+        }
+
+        Debug.Error("No gameObject found with tag '" + tag + "'");
+        return null;
+    }
 }

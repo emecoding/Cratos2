@@ -38,6 +38,9 @@ public class Texture extends Resource
 
     public int GetID() { return m_ID; }
 
+    public int Width() { return m_Width; }
+    public int Height() { return m_Height; }
+
     public static Texture CreateTexture3D(String name, String path)
     {
         Texture texture = new Texture(name, path);

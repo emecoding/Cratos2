@@ -38,6 +38,8 @@ public class Renderer implements ApplicationSystem
     private List<Vector4f> m_DebugRectangles = new ArrayList<>();
     private List<BoxCollider> m_DebugCollisionBoxes = new ArrayList<>();
 
+    private List<Integer> m_GLFlagsToEnable = new ArrayList<>();
+
     private Model m_CollisionDebugBox = null;
 
     private int m_DebugVAO, m_DebugVBO;
@@ -58,7 +60,7 @@ public class Renderer implements ApplicationSystem
     @Override
     public void Initialize()
     {
-        glEnable(GL_DEPTH_TEST);
+        EnableGLFlags();
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -78,12 +80,7 @@ public class Renderer implements ApplicationSystem
 
     }
 
-    private void UpdateCurrentCamera()
-    {
-        if(m_Cameras.size() == 0)
-            return;
-        m_CurrentCamera = m_Cameras.get(0);
-    }
+
     public Camera GetCurrentCamera() { return m_CurrentCamera; }
     public void AddCamera(Camera camera_component)
     {
@@ -143,6 +140,17 @@ public class Renderer implements ApplicationSystem
 
         m_DebugRectangles.clear();
 
+    }
+    public void AddGLFlagToEnable(int GL_FLAG)
+    {
+        m_GLFlagsToEnable.add(GL_FLAG);
+    }
+    private void EnableGLFlags()
+    {
+        for(Integer GL_FLAG : m_GLFlagsToEnable)
+        {
+            glEnable(GL_FLAG);
+        }
     }
     private void SetUpDebugRendering()
     {
@@ -241,6 +249,12 @@ public class Renderer implements ApplicationSystem
     private void StopRenderingCurrentShader()
     {
         glUseProgram(0);
+    }
+    private void UpdateCurrentCamera()
+    {
+        if(m_Cameras.size() == 0)
+            return;
+        m_CurrentCamera = m_Cameras.get(0);
     }
 
 
