@@ -3,6 +3,7 @@ package SandboxGame;
 import Application.Application;
 import Application.GameObject.GameObject;
 import Application.GameObjectComponent.*;
+import Application.GameObjectComponent.Animator2D.Animator2D;
 import Application.GameObjectComponent.Collider.BoxCollider;
 import Application.GameObjectComponent.Collider.RectangleCollider;
 import Application.Resource.SpriteSheet;
@@ -66,12 +67,18 @@ public class Launcher
         sandbox_gameObject2.AddComponent(new Sprite("default_sprite_shader"));
 
         SpriteSheet testSpriteSheet = SpriteSheet.LoadSpriteSheet("src/main/resources/textures/testTexture05.png", 32, 32);
+        SpriteSheet testSpriteSheet2 = SpriteSheet.LoadSpriteSheet("src/main/resources/textures/testTexture04.png", 32, 32);
 
-        Animator2D animator2D = (Animator2D) sandbox_gameObject2.AddComponent(new Animator2D("default_sprite_shader", testSpriteSheet));
-        animator2D.SetAnimation("test", 0, testSpriteSheet.AmountOfFrames()-1);
-        animator2D.SetCurrentAnimation("test");
-        animator2D.SetFrameTime(0.1);
-        animator2D.SetFrameRate(700.0);
+        Animator2D animator2D = (Animator2D) sandbox_gameObject2.AddComponent(new Animator2D("default_sprite_shader"));
+
+        animator2D.SetDefaultFrameTime(0.1);
+        animator2D.SetDefaultFrameRate(700.0);
+
+        animator2D.AddAnimation("test1", testSpriteSheet.GetSprites());
+        animator2D.AddAnimation("test2", testSpriteSheet2.GetSprites());
+
+        animator2D.SetCurrentAnimation("test2");
+
 
         RigidBody rb2 = (RigidBody) sandbox_gameObject2.AddComponent(new RigidBody());
         rb2.Gravity = 0.0f;

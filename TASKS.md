@@ -55,3 +55,5 @@
     - Also 2D sprite sheet animations
 
 //19: Flipping sprites
+
+20: Redo Animator2D
